@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import api from "../../services/api";
 import Food from "../../components/Food";
-import ModalAddFood, { NewFoodDTO } from "../../components/ModalAddFood";
+import ModalAddFood from "../../components/ModalAddFood";
 import ModalEditFood from "../../components/ModalEditFood";
 import { FoodsContainer } from "./styles";
-import { FoodDTO } from "../../types";
+import { FoodDTO, FoodFormDTO } from "../../types";
 
 function Dashboard() {
   const [foods, setFoods] = useState<FoodDTO[]>([]);
@@ -24,7 +24,7 @@ function Dashboard() {
     loadFoods();
   }, []);
 
-  const handleAddFood = async (food: NewFoodDTO) => {
+  const handleAddFood = async (food: FoodFormDTO) => {
     try {
       const { data } = await api.post<FoodDTO>("/foods", {
         ...food,
@@ -37,7 +37,7 @@ function Dashboard() {
     }
   };
 
-  const handleUpdateFood = async (food: FoodDTO) => {
+  const handleUpdateFood = async (food: FoodFormDTO) => {
     try {
       const foodUpdated = await api.put<FoodDTO>(`/foods/${editingFood.id}`, {
         ...editingFood,

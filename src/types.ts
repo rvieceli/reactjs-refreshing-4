@@ -6,3 +6,5 @@ export interface FoodDTO {
   available: boolean;
   image: string;
 }
+
+export type FoodFormDTO = Omit<FoodDTO, "id" | "available">;
