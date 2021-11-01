@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import api from "../../services/api";
 import Food from "../../components/Food";
-import ModalAddFood from "../../components/ModalAddFood";
+import ModalAddFood, { NewFoodDTO } from "../../components/ModalAddFood";
 import ModalEditFood from "../../components/ModalEditFood";
 import { FoodsContainer } from "./styles";
 import { FoodDTO } from "../../types";
@@ -24,7 +24,7 @@ function Dashboard() {
     loadFoods();
   }, []);
 
-  const handleAddFood = async (food: FoodDTO) => {
+  const handleAddFood = async (food: NewFoodDTO) => {
     try {
       const { data } = await api.post<FoodDTO>("/foods", {
         ...food,
